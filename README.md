@@ -1,6 +1,6 @@
 # MySimpleApplication
 
-**Priority Queue Web Service**
+##Priority Queue Web Service##
 
 A webservice which allows user to view the work order queue in the order of their priority and the wait time. A work order consists of
 
@@ -20,24 +20,24 @@ Using the HTTP methods (GET, POST, DELETE), one can operate on the work orders l
 - Get position of id – Gets the position of the work order by using id.
 - Average Wait Time – Calculates average mean time of Ids in the queue.
 
-**Pre-requisites:**
+###Pre-requisites:###
 
 - JDK 1.8 or above
 - NetBeans/Eclipse/STS/IntelliJ etc
 - Maven 3 +/Gradle
 - Postman(Chrome extension)/Curl
 
-**Build:**
+###Build:###
 
 Source code is built with maven 3.2.3. Web server used to host the application is Tomcat server and the application is available at port 8080.
 
-**Run:**
+###Run:###
 
 To run the application, get the jar from target folder. Command to run jar is as follows:
 
 java -jar SamplePriorityQueueApp-1.0.0.jar
 
-**RESTful URLs:**
+###RESTful URLs:###
 
 Once the application is up and running, you can browse the below mentioned URLs to see the functionality of it.
 
@@ -77,6 +77,6 @@ GET [http://localhost:8080/SamplePriorityQueue/api/avgWaitTime](http://localhost
 
 **Curl Command:** curl -v -H &quot;Content-Type: application/json&quot; GET http://localhost:8080/SamplePriorityQueue/api/avgWaitTime
 
-**Contributors:**
+###Contributors:###
 
 Arpitha Bandri
