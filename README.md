@@ -25,7 +25,7 @@ Using the HTTP methods (GET, POST, DELETE), one can operate on the work orders l
 - JDK 1.8 or above
 - NetBeans/Eclipse/STS/IntelliJ etc
 - Maven 3 +/Gradle
-- Postman – Chrome extension (Optional)/Curl
+- Postman(Chrome extension)/Curl
 
 **Build:**
 
