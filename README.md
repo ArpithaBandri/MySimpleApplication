@@ -76,3 +76,7 @@ GET [http://localhost:8080/SamplePriorityQueue/api/pos/25](http://localhost:8080
 GET [http://localhost:8080/SamplePriorityQueue/api/avgWaitTime](http://localhost:8080/SamplePriorityQueue/api/avgWaitTime)
 
 **Curl Command:** curl -v -H &quot;Content-Type: application/json&quot; GET http://localhost:8080/SamplePriorityQueue/api/avgWaitTime
+
+**Contributors:**
+
+Arpitha Bandri
