@@ -1,7 +1,6 @@
 package com.priorityqueue.springboot.model;
 	
 import java.util.Date;
-import java.util.Collections;
 
 public class WorkOrder implements Comparable<WorkOrder>{
         private long index;
@@ -10,7 +9,6 @@ public class WorkOrder implements Comparable<WorkOrder>{
         private String idClass;
         private float rank;
         private long waitTimeInSec;
-        //public WorkOrder next;
 	
 	public WorkOrder(){
 		index=0;
@@ -76,25 +74,11 @@ public class WorkOrder implements Comparable<WorkOrder>{
 	public int compareTo(WorkOrder wo) {
 		return (int)(wo.getRank() - this.getRank());
 	}
-        
-	/*@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		WorkOrder other = (WorkOrder) obj;
-		if (index != other.index)
-			return false;
-		return true;
-	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + "index="+ index + "]";
-	}*/
+		return "WorkOrder [Index= " + index + " Id= "+ id + " Date= "+ date + " Rank= "+ rank + " Wait Time= "+ waitTimeInSec +"]";
+	}
 
 
 }

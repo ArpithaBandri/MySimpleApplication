@@ -35,7 +35,7 @@ public class PriorityQueueImpl implements PriorityQueueService, Comparator<WorkO
         @Override
 	public List<WorkOrder> findAllWorkOrders() {
 		
-            if(workOrders!=null)
+            if(workOrders.size()>0)
             {
                 Collections.sort(workOrders);
                 return workOrders;
@@ -85,7 +85,11 @@ public class PriorityQueueImpl implements PriorityQueueService, Comparator<WorkO
         
         @Override
         public WorkOrder findTopWorkOrder() {
-            return workOrders.get(0);
+            if(workOrders.size()>0)
+            {
+                return workOrders.get(0);
+            }
+                return null;
         }
         
         public void deleteTopWorkOrder(){
@@ -126,6 +130,8 @@ public class PriorityQueueImpl implements PriorityQueueService, Comparator<WorkO
         
         public List<WorkOrder> calculateRankOfWorkOrder(List<WorkOrder> wOrders)
         {
+            if(!wOrders.isEmpty())
+            {
             for (Iterator<WorkOrder> iterator = wOrders.iterator(); iterator.hasNext(); ) 
             {
                     long n = 0;
@@ -156,6 +162,7 @@ public class PriorityQueueImpl implements PriorityQueueService, Comparator<WorkO
 		    }
                     
 		} return wOrders;
+        }return null;
         }
         
         public AverageWaitTime getAvgWaitTime(Date curDate){
@@ -184,8 +191,10 @@ public class PriorityQueueImpl implements PriorityQueueService, Comparator<WorkO
                 for(int i=0; i<wOrders.size();i++)
                 {
                     if(wOrders.get(i).getId()==id)
+                    {
                         pos.setPos(i+1);
                         pos.setId(id);
+                    }
                 }
             }
             return pos;

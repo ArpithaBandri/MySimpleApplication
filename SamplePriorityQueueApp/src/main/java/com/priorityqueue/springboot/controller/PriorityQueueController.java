@@ -34,11 +34,12 @@ public class PriorityQueueController {
 	// -------------------Retrieve All WorkOrders---------------------------------------------
 
 	@RequestMapping(value = "/workOrder/", method = RequestMethod.GET)
-	public ResponseEntity<List<WorkOrder>> listAllUsers() {
+	public ResponseEntity<List<WorkOrder>> listAllWorkOrders() {
 		List<WorkOrder> workOrders = pqService.findAllWorkOrders();
 		if (workOrders==null) {
                     logger.error("There are no workorders");
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+                    return new ResponseEntity(new CustomErrorType("There are no workorders!"),HttpStatus.NO_CONTENT);
+			//return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<WorkOrder>>(pqService.calculateRankOfWorkOrder(workOrders), HttpStatus.OK);
 	}
@@ -51,9 +52,9 @@ public class PriorityQueueController {
 	public ResponseEntity<?> addWorkOrder(@RequestBody WorkOrder wo, UriComponentsBuilder ucBuilder) {
 		logger.info("Adding WorkOrder : {}", wo);
                 
-                if(wo.getId()<=0 || wo.getId()>9223372036854775807l) {
+                if(wo.getId()<=0 || wo.getId()>Long.MAX_VALUE) {
                     logger.error("{} is not in the range. Please provide valid ID between 0 and 9223372036854775807.", wo.getId());
-			return new ResponseEntity(new CustomErrorType(wo.getIdClass() +" is not in the range. Please provide valid ID between 0 and 9223372036854775807."),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity(new CustomErrorType(wo.getId() +" is not in the range. Please provide valid ID between 0 and 9223372036854775807."),HttpStatus.BAD_REQUEST);
                 }
                 
 		if (pqService.isWorkOrderExist(wo.getId())) {
@@ -93,7 +94,7 @@ public class PriorityQueueController {
 		logger.info("Fetching & Deleting Top WorkOrder");
 
 		WorkOrder wo = pqService.findTopWorkOrder();
-		if (wo == null) {
+		if(wo==null) {
 			logger.error("Unable to remove top WorkOrder since there are no WorkOrders.");
 			return new ResponseEntity(new CustomErrorType("Unable to remove top WorkOrder since there are no WorkOrders."),
 					HttpStatus.NOT_FOUND);
@@ -124,11 +125,16 @@ public class PriorityQueueController {
 		logger.info("Fetching Position of a WorkOrder");
 
 		List<WorkOrder> wo = pqService.findAllWorkOrders();
+                PositionOfWorkOrder pos = new PositionOfWorkOrder();
 		if (wo == null) {
 			logger.error("Unable to get the Position of work order. WorkOrder with id {} not found.", id);
-			return new ResponseEntity(new CustomErrorType("Unable to get the Position of work order. WorkOrder with id " + id + " not found."),
-					HttpStatus.NOT_FOUND);
+			return new ResponseEntity(new CustomErrorType("Unable to get the Position of work order. WorkOrder with id " + id + " not found."),HttpStatus.NOT_FOUND);
 		}
+                pos = pqService.getPosOfId(wo,id);
+                if(pos.getId()==0 && pos.getPos()==0)
+                {
+                 return new ResponseEntity(new CustomErrorType("Unable to get the Position of work order. WorkOrder with id " + id + " not found."),HttpStatus.NOT_FOUND);   
+                }
 		return new ResponseEntity<PositionOfWorkOrder>(pqService.getPosOfId(wo,id),HttpStatus.OK);
 	}
 

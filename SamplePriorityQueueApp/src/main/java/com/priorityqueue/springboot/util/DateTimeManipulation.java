@@ -16,10 +16,7 @@ public class DateTimeManipulation {
     public long calculateWaitTimeInSeconds(Date WorkOrderAddedTime)
     {
         Date curDate = new Date();
-        //System.out.println("Current DateTime: "+curDate.getTime());
-        //System.out.println("WorkOrderAddedTime: "+WorkOrderAddedTime.getTime());
         noOfSeconds = (curDate.getTime() - WorkOrderAddedTime.getTime())/1000;
-        //System.out.println("No Of Seconds: "+noOfSeconds);
         return noOfSeconds;
     }
 }
